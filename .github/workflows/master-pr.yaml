@@ -1,6 +1,6 @@
-name: master
+name: master-pr
 on:
-  push:
+  pull_request:
     branches: [master]
   workflow_dispatch:
 jobs:
