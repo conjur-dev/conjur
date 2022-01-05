@@ -1,7 +1,6 @@
 {
   "name": "conjure",
   "scripts": {
-    "clean": "node scripts/clean.js",
     "start": "react-scripts start",
     "prebuild": "yarn install",
     "build": "react-scripts build",
@@ -23,7 +22,8 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "http-proxy-middleware": "^0.20.0"
+    "http-proxy-middleware": "^0.20.0",
+    "redux-saga-test-plan": "^4.0.4"
   },
   "resolutions": {
     "acorn": "^7.1.1",
