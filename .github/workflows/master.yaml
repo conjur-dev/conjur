@@ -1,7 +1,11 @@
 name: master
 on:
   push:
-    branches: [master]
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
   workflow_dispatch:
 jobs:
   build:
@@ -9,12 +13,28 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - run: yarn
+      - run: yarn install
       - run: yarn run build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: conjur
+          path: |
+            build/
+  e2e:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: conjur
+          path: build/
+      - run: docker-compose up --build -d
+      - run: docker-compose run e2e yarn test
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - run: yarn
+      - run: yarn install
       - run: yarn test
