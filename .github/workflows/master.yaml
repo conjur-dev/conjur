@@ -9,6 +9,7 @@ on:
   workflow_dispatch:
 jobs:
   build:
+    name: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -21,6 +22,7 @@ jobs:
           path: |
             build/
   e2e:
+    name: e2e
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -32,6 +34,7 @@ jobs:
       - run: docker-compose up --build -d
       - run: docker-compose run e2e yarn test
   test:
+    name: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
